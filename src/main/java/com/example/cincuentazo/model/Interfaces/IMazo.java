@@ -1,4 +1,5 @@
 package com.example.cincuentazo.model.Interfaces;
 
 public interface IMazo {
+    public String getCard();
 }
