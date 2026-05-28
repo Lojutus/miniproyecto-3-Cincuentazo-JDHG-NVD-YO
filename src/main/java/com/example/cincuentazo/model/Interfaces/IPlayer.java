@@ -1,5 +1,6 @@
 package com.example.cincuentazo.model.Interfaces;
 
 public interface IPlayer {
-    public String[] Gethand();
+    public String[] getHand();
+    public Boolean swichtCard(String card , int Position);
 }
