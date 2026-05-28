@@ -1,5 +1,5 @@
 package com.example.cincuentazo.model.Interfaces;
 
-public interface IMaquina {
+public interface IMachine {
     public String think(String[] hand , int sum);
 }

@@ -1,19 +1,19 @@
 package com.example.cincuentazo.model.Clases;
 
-import com.example.cincuentazo.model.AbstractsClases.AbstractJuego;
-import com.example.cincuentazo.model.Interfaces.IJuego;
+import com.example.cincuentazo.model.AbstractsClases.AbstractGame;
 
-public  class Juego extends AbstractJuego {
-    private static final Juego INSTANCE = new Juego();
+public  class Game extends AbstractGame {
+
+    private static final Game INSTANCE = new Game();
 
 
-    private Juego() {}
+    private Game() {}
 
     /**
      * This function helps to obtain the correct instance (the only instance).
      * @return the single instance
      */
-    public static Juego getInstance() {
+    public static Game getInstance() {
         return INSTANCE;
     } //singleton
 
@@ -23,7 +23,7 @@ public  class Juego extends AbstractJuego {
      * Currently resolves the instance without changing board state.
      */
     public static void init() {
-        Juego game = getInstance();
+        Game game = getInstance();
 
     }
 

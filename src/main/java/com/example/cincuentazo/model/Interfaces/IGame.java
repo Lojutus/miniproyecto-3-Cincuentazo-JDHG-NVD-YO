@@ -1,5 +1,5 @@
 package com.example.cincuentazo.model.Interfaces;
 
-public interface IJuego {
+public interface IGame {
      void add();
 }
