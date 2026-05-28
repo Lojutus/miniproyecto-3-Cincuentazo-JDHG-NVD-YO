@@ -29,6 +29,37 @@ import com.example.cincuentazo.model.Clases.Deck;
 */
 public class GameTests {
 
+    //DECK
 
+    @org.junit.Test
+    public void testDeck() {
+
+        Deck deck = new Deck();
+
+        assertNotNull(deck.getCard());
+
+    }
+
+    @org.junit.Test
+    public void testDeckIsCreated() {
+
+        Deck deck = new Deck();
+
+        assertNotNull(deck);
+
+    }
+
+    @org.junit.Test
+    public void testDifferentCards() {
+
+        Deck deck = new Deck();
+
+        String firstCard = deck.getCard();
+        String secondCard = deck.getCard();
+
+        assertNotEquals(firstCard, secondCard);
+
+    }
+   //Player
 
 }
