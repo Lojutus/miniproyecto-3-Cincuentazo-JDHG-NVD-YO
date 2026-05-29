@@ -1,7 +1,10 @@
 package com.example.cincuentazo.model.Interfaces;
 
+import com.example.cincuentazo.model.Clases.Player;
+
 public interface IGame {
      Boolean add(String card);
-     public int check( char num);
-     public int getSum();
+      int check( char num);
+      int getSum();
+      Player getPlayer(int index);
 }

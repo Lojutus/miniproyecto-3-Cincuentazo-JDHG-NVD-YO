@@ -7,7 +7,9 @@ public  class Game extends AbstractGame {
     private static Game INSTANCE = new Game();
 
 
-    private Game() {}
+    private Game() {
+        newPlayer();
+    }
 
     /**
      * This function helps to obtain the correct instance (the only instance).
