@@ -5,6 +5,7 @@ import com.example.cincuentazo.model.Interfaces.IPlayer;
 public abstract class AbstractPlayer implements IPlayer {
 
     String[] hand ={"", "", "", ""};
+    Boolean playing = true;
 
     public String[] getHand(){
         return hand;

@@ -4,7 +4,7 @@ import com.example.cincuentazo.model.AbstractsClases.AbstractGame;
 
 public  class Game extends AbstractGame {
 
-    private static final Game INSTANCE = new Game();
+    private static Game INSTANCE = new Game();
 
 
     private Game() {}
@@ -25,6 +25,9 @@ public  class Game extends AbstractGame {
     public static void init() {
         Game game = getInstance();
 
+    }
+    public static void restartInstance(){
+        INSTANCE = new Game();
     }
 
 
