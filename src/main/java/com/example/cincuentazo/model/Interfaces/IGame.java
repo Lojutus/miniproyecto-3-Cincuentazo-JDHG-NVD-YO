@@ -7,4 +7,5 @@ public interface IGame {
       int check( char num);
       int getSum();
       Player getPlayer(int index);
+     int getPlayers();
 }
