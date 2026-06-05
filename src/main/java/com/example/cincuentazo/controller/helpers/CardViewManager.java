@@ -15,7 +15,7 @@ public class CardViewManager {
         }
 
     }
-    Image chargeImage(String cardName){
-        return new Image(Objects.requireNonNull(CardViewManager.class.getResourceAsStream("/Cards/" + cardName + ".png")));
+    public Image chargeImage(String cardName){
+        return new Image(Objects.requireNonNull(CardViewManager.class.getResourceAsStream("/com/example/cincuentazo/Cards/" + cardName + ".png")));
     }
 }
