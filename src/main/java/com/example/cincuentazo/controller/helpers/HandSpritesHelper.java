@@ -9,7 +9,7 @@ public class HandSpritesHelper {
     public ImageView slot2;
     public ImageView slot3;
     public ImageView slot4;
-    HandSpritesHelper(ImageView slotR1 , ImageView slotR2 , ImageView slotR3, ImageView slotR4){
+    public HandSpritesHelper(ImageView slotR1, ImageView slotR2, ImageView slotR3, ImageView slotR4){
         setAllSlots( slotR1 ,  slotR2 ,  slotR3,  slotR4);
     }
 
@@ -21,9 +21,9 @@ public class HandSpritesHelper {
     }
     public void  setAllSlots(Image slotR1 , Image slotR2 , Image slotR3, Image slotR4){
         slot1.setImage(slotR1);
-        slot2.setImage(slotR1);
-        slot3.setImage(slotR1);
-        slot4.setImage(slotR1);
+        slot2.setImage(slotR2);
+        slot3.setImage(slotR3);
+        slot4.setImage(slotR4);
     }
 
     public void setSlot1(ImageView slot1) {
