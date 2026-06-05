@@ -23,6 +23,10 @@ public class CardViewManager {
         }
 
     }
+    public void updateCard(ImageView imageView, String card){
+        imageView.setImage(chargeImage(card));
+        imageView.setUserData(card);
+    }
     public Image chargeImage(String cardName){
         return new Image(Objects.requireNonNull(CardViewManager.class.getResourceAsStream("/com/example/cincuentazo/Cards/" + cardName + ".png")));
     }

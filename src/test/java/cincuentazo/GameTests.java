@@ -128,6 +128,24 @@ public class GameTests {
 
     }
     @org.junit.Test
+    public void testingAAdd(){
+        Game game = Game.getInstance();
+        Game.restartInstance();
+        game.add("A");
+        assertEquals(10 , game.getSum());
+        game.add("A");
+        assertEquals(20 , game.getSum());
+        game.add("A");
+        assertEquals(30 , game.getSum());
+        game.add("A");
+        assertEquals(40 , game.getSum());
+        game.add("A");
+        assertEquals(50 , game.getSum());
+        game.add("A");
+        assertEquals(50 , game.getSum());
+
+    }
+    @org.junit.Test
     public void testingNewPlayers(){
         Game game = Game.getInstance();
         Game.restartInstance();

@@ -38,7 +38,10 @@ public abstract class AbstractGame implements IGame {
         if(num>65){
             return -10;
         }
-        else if(num == 65){
+        else if(num==65){
+            return 10;
+        }
+        else if( num-'0'==1){
             return 10;
         } else if ( num-'0'==9) {
             return 0;
@@ -79,12 +82,15 @@ public abstract class AbstractGame implements IGame {
                 }
 
             }
+            lastCard = deck.getCard();
+            add(lastCard);
             return  true;
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
 
     }
+    public String getLastCard(){return lastCard;}
 
 
 }

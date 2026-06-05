@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
@@ -34,7 +35,7 @@
             </ImageView>
          </children>
       </HBox>
-      <ImageView fx:id="lastCardImage" fitHeight="99.0" fitWidth="100.0" layoutX="266.0" layoutY="151.0" pickOnBounds="true" preserveRatio="true" onMouseClicked="#sendInput" >
+      <ImageView fx:id="lastCardImage" fitHeight="99.0" fitWidth="100.0" layoutX="266.0" layoutY="151.0" onMouseClicked="#sendInput" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Cards/back.png" />
          </image>
@@ -111,5 +112,6 @@
             </ImageView>
          </children>
       </HBox>
+      <Label layoutX="286.0" layoutY="134.0" text="Suma" textFill="#ddff00" fx:id="sum" />
    </children>
 </AnchorPane>

@@ -8,4 +8,6 @@ public interface IGame {
       int getSum();
       Player getPlayer(int index);
      int getPlayers();
+     Boolean initGame();
+    String getLastCard();
 }
