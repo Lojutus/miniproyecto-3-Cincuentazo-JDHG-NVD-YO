@@ -63,6 +63,9 @@ public abstract class AbstractGame implements IGame {
     public Player getPlayer(int index){
         return Players.get(index);
     }
+    public int getPlayers(){
+        return Players.size();
+    }
     public Boolean initGame(){
         if(state) return false;
         state =true;

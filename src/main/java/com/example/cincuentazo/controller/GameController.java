@@ -29,7 +29,6 @@ public class GameController
  }
  @FXML
  public void initialize(){
-        Game.getInstance().initGame();
         cartsSprites = new HandSpritesHelper(one, two , three , four);
         spriteUpdaterHelper.updateDeck(Game.getInstance().getPlayer(0) , cartsSprites);
  }
