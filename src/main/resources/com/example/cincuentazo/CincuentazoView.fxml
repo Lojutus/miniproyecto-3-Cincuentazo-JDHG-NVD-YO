@@ -1,15 +1,117 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.cincuentazo.controller.GameController">
    <children>
       <ImageView fitHeight="400.0" fitWidth="600.0">
          <image>
             <Image url="@../../../images/MesaPoker.png" />
          </image>
       </ImageView>
+      <HBox layoutX="162.0" layoutY="300.0" prefHeight="100.0" prefWidth="275.0">
+         <children>
+            <ImageView fx:id="one" fitHeight="99.0" fitWidth="100.0" onMouseClicked="#selectCard" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@Cards/back.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="two" fitHeight="99.0" fitWidth="100.0" layoutX="10.0" layoutY="10.0" onMouseClicked="#selectCard" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@Cards/back.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="three" fitHeight="99.0" fitWidth="100.0" layoutX="79.0" layoutY="10.0" onMouseClicked="#selectCard" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@Cards/back.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="four" fitHeight="99.0" fitWidth="100.0" layoutX="148.0" layoutY="10.0" onMouseClicked="#selectCard" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@Cards/back.png" />
+               </image>
+            </ImageView>
+         </children>
+      </HBox>
+      <ImageView fx:id="lastCardImage" fitHeight="99.0" fitWidth="100.0" layoutX="266.0" layoutY="151.0" onMouseClicked="#sendInput" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Cards/back.png" />
+         </image>
+      </ImageView>
+      <HBox layoutX="162.0" prefHeight="100.0" prefWidth="275.0">
+         <children>
+            <ImageView fitHeight="99.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@Cards/back.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="99.0" fitWidth="100.0" layoutX="10.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@Cards/back.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="99.0" fitWidth="100.0" layoutX="79.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@Cards/back.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="99.0" fitWidth="100.0" layoutX="148.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@Cards/back.png" />
+               </image>
+            </ImageView>
+         </children>
+      </HBox>
+      <HBox alignment="CENTER_RIGHT" layoutX="-88.0" layoutY="151.0" prefHeight="100.0" prefWidth="275.0" rotate="90.0">
+         <children>
+            <ImageView fitHeight="99.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@Cards/back.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="99.0" fitWidth="100.0" layoutX="10.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@Cards/back.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="99.0" fitWidth="100.0" layoutX="79.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@Cards/back.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="99.0" fitWidth="100.0" layoutX="148.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@Cards/back.png" />
+               </image>
+            </ImageView>
+         </children>
+      </HBox>
+      <HBox alignment="CENTER_RIGHT" layoutX="412.0" layoutY="151.0" prefHeight="100.0" prefWidth="275.0" rotate="90.0">
+         <children>
+            <ImageView fitHeight="99.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@Cards/back.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="99.0" fitWidth="100.0" layoutX="10.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@Cards/back.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="99.0" fitWidth="100.0" layoutX="79.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@Cards/back.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="99.0" fitWidth="100.0" layoutX="148.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@Cards/back.png" />
+               </image>
+            </ImageView>
+         </children>
+      </HBox>
+      <Label layoutX="286.0" layoutY="134.0" text="Suma" textFill="#ddff00" fx:id="sum" />
    </children>
 </AnchorPane>
