@@ -8,7 +8,7 @@ import javafx.scene.input.MouseEvent;
 import java.util.Objects;
 
 public class CardViewManager {
-    public Boolean updateDeck(Player player , HandSpritesHelper handView){
+    public void updateDeck(Player player , HandSpritesHelper handView){
         try {
             String[] hand = player.getHand();
 
@@ -17,7 +17,6 @@ public class CardViewManager {
             handView.slot2.setUserData(hand[1]);
             handView.slot3.setUserData(hand[2]);
             handView.slot4.setUserData(hand[3]);
-            return true;
         } catch (RuntimeException e) {
             throw new RuntimeException(e);
         }

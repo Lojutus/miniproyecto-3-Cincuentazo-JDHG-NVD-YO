@@ -155,7 +155,6 @@ public class GameTests {
         assertTrue(game.newPlayer());
         assertFalse(game.newPlayer());
     }
-    //IMPORTANT , TEST OF ALL BACKEND.
     @org.junit.Test
     public void testingTheGame(){
         Game.restartInstance();
@@ -168,10 +167,77 @@ public class GameTests {
         assertFalse(game.initGame());
         for (int i = 0; i < 4; i++) {
             System.out.println(Arrays.toString(game.getPlayer(i).getHand()));
-
-        }
-
+    public void testingGamePlayers(){
+        Game game = Game.getInstance();
+        Game.restartInstance();
+        assertEquals(1 , game.getPlayers());
+        assertTrue(game.newPlayer());
+        assertEquals(2 , game.getPlayers());
+        assertTrue(game.newPlayer());
+        assertEquals(3 , game.getPlayers());
+        assertTrue(game.newPlayer());
 
 
     }
+    @org.junit.Test
+    public void testingWin(){
+        Game game = Game.getInstance();
+        Game.restartInstance();
+        game.initGame();
+        assertTrue(game.checkWin());
+
+        Game.restartInstance();
+         game = Game.getInstance();
+        assertTrue(game.newPlayer());
+        game.getPlayer(1).playing = false;
+        assertTrue(game.newPlayer());
+        game.getPlayer(2).playing = false;
+        game.initGame();
+        assertTrue(game.checkWin());
+    }
+    @org.junit.Test
+    public void testingCardSwicht(){
+        
+        Game game = Game.getInstance();
+        Game.restartInstance();
+        String s = game.getPlayer(0).getHand()[0];
+        game.changeHandCard(0 , s);
+        assertNotEquals(s, game.getPlayer(0).getHand()[0] );
+        String ss = game.getPlayer(0).getHand()[0];
+        game.changeHandCard(0 , 0);
+        assertNotEquals(ss, game.getPlayer(0).getHand()[0] );
+        
+       // --------------------------
+        Game.restartInstance();
+        game = Game.getInstance();
+        game.initGame();
+        String[] expectHand = game.getPlayer(0).getHand();
+
+        game.changeHandCard(0 , 0);
+
+        String sss = game.getPlayer(0).getHand()[0];
+
+
+        expectHand[0]= sss;
+
+        assertTrue(compare( game.getPlayer(0).getHand(), expectHand));
+        
+        // --------------------------
+
+        Game.restartInstance();
+        game = Game.getInstance();
+        game.initGame();
+        expectHand = game.getPlayer(0).getHand();
+
+        game.changeHandCard(0 ,expectHand[0]);
+
+        String ssss = game.getPlayer(0).getHand()[0];
+
+
+        expectHand[0]= ssss;
+
+        assertTrue(compare( game.getPlayer(0).getHand(), expectHand));
+
+    }
+
 }
