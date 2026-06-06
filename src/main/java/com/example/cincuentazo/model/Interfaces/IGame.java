@@ -13,4 +13,5 @@ public interface IGame {
     Boolean checkWin();
     Boolean changeHandCard(int playerIndex , int position);
     Boolean changeHandCard(int playerIndex , String card);
+    void playerLose(int playerIndex);
 }

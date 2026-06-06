@@ -90,7 +90,7 @@ void updateSum(){
     }
 @FXML
 public void sendInput(MouseEvent mouseEvent) {
-        if(turn==0){
+        if(turn==0 && selectedCard!=null){
             if(sentCard(actualCard) ){
 
                 spriteUpdaterHelper.updateCard(lastCardImage , actualCard);
@@ -103,6 +103,17 @@ public void sendInput(MouseEvent mouseEvent) {
 
             }
             else{
+                if(!Game.getInstance().checkLose()){
+
+                    Alert alert = new Alert(Alert.AlertType.WARNING);
+
+                    alert.setTitle("Warning");
+                    alert.setHeaderText("CUIDADO");
+                    alert.setContentText("ESTA CARTA NO ES VALIDA");
+
+                    alert.showAndWait();
+                    return;
+                };
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
 
                 alert.setTitle("GAME OVER");
@@ -139,7 +150,7 @@ private void machineTurn(){
         }*/   //IMPLEMENTACIÓN PENDIENTE
 
         if(!Game.getInstance().add(player.getHand()[0])){
-            player.playing = false;
+           Game.getInstance().playerLose(turn);
             disablePlayers(turn);
             if(Game.getInstance().checkWin()){
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -150,7 +161,7 @@ private void machineTurn(){
                 alert.showAndWait();
             }
         }
-        System.out.println(Arrays.toString(player.getHand()));
+
         // Por ahora la máquina da la primera carta siempre
         Game.getInstance().changeHandCard(turn , 0);
     }
