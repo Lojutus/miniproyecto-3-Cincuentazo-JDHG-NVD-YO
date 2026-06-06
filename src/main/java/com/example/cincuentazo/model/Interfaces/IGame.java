@@ -10,4 +10,8 @@ public interface IGame {
      int getPlayers();
      Boolean initGame();
     String getLastCard();
+    Boolean checkWin();
+    Boolean changeHandCard(int playerIndex , int position);
+    Boolean changeHandCard(int playerIndex , String card);
+    void playerLose(int playerIndex);
 }

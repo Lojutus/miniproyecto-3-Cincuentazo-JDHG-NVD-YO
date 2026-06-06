@@ -26,4 +26,8 @@ public  abstract class AbstractDeck implements IDeck {
 
         return deck.removeFirst();
     }
+    public void addCard(String card){
+        deck.add(card);
+        Collections.shuffle(deck);
+    }
 }
