@@ -20,6 +20,7 @@ public abstract class AbstractGame implements IGame {
 
             char num = card.charAt(0) ;
             numTosum =check(num);
+
         }catch (Exception e){
             return false;
         }
@@ -31,6 +32,7 @@ public abstract class AbstractGame implements IGame {
             }
             return false;
         }
+        if (numTosum ==11) numTosum =10; // if is eleven means that the orignal numtosum was 10
         sum+=numTosum;
         lastCard = card;
         return true;
@@ -43,7 +45,7 @@ public abstract class AbstractGame implements IGame {
             return 10;
         }
         else if( num-'0'==1){
-            return 10;
+            return 11; // Ten is busy whit "A" so we use eleven to send a 10
         } else if ( num-'0'==9) {
             return 0;
         }

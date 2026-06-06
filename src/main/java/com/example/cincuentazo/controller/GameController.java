@@ -11,6 +11,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 
+import java.util.Arrays;
+
 public class GameController
 {
     public ImageView two;
@@ -47,8 +49,7 @@ void updateSum(){
  public void initialize(){
      if(Game.getInstance().getPlayers() <=1){
          Game.getInstance().newPlayer();
-         Game.getInstance().newPlayer();
-         Game.getInstance().newPlayer();
+
 
      }
         Game.getInstance().initGame();
@@ -118,7 +119,7 @@ private void changeTurn(){
     selectedCard = null;
 
     turn++;
-    if(turn>Game.getInstance().getPlayers()){
+    if(turn>=Game.getInstance().getPlayers()){
         turn = 0;
         return;
     }
@@ -130,12 +131,13 @@ private void changeTurn(){
 }
 private void machineTurn(){
 
-    Player player = Game.getInstance().getPlayer(turn-1);
+    Player player = Game.getInstance().getPlayer(turn);
 
     if(player.playing){
         /* if(!Game.getInstance().add(askMachine())){
             player.playing = false;
         }*/   //IMPLEMENTACIÓN PENDIENTE
+
         if(!Game.getInstance().add(player.getHand()[0])){
             player.playing = false;
             disablePlayers(turn);
@@ -147,8 +149,10 @@ private void machineTurn(){
                 alert.setContentText("Fin del juego");
                 alert.showAndWait();
             }
-        } // Por ahora la máquina da la primera carta siempre
-       // Game.getInstance().changeHandCard(turn-1 , 0);
+        }
+        System.out.println(Arrays.toString(player.getHand()));
+        // Por ahora la máquina da la primera carta siempre
+        Game.getInstance().changeHandCard(turn , 0);
     }
 
     updateSum();
