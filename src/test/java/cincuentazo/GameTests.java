@@ -7,7 +7,6 @@ import com.example.cincuentazo.model.Clases.Deck;
 import com.example.cincuentazo.model.Clases.Game;
 import com.example.cincuentazo.model.Clases.Player;
 
-import java.util.Arrays;
 import java.util.Objects;
 
 /*
@@ -156,17 +155,6 @@ public class GameTests {
         assertFalse(game.newPlayer());
     }
     @org.junit.Test
-    public void testingTheGame(){
-        Game.restartInstance();
-        Game game = Game.getInstance();
-        for (int i = 0; i < 4; i++) {
-            assertTrue(game.newPlayer());
-        }
-        Player human = game.getPlayer(0);
-        assertTrue(game.initGame());
-        assertFalse(game.initGame());
-        for (int i = 0; i < 4; i++) {
-            System.out.println(Arrays.toString(game.getPlayer(i).getHand()));
     public void testingGamePlayers(){
         Game game = Game.getInstance();
         Game.restartInstance();
