@@ -24,5 +24,10 @@
          </font>
       </Label>
       <Button layoutX="261.0" layoutY="254.0" mnemonicParsing="false" text="Como jugar" />
+      <ImageView fitHeight="407.0" fitWidth="608.0">
+         <image>
+            <Image url="@../../../images/Limpio.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>
