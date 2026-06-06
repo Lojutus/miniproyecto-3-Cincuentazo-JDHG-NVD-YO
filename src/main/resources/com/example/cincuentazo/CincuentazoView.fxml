@@ -40,7 +40,7 @@
             <Image url="@Cards/back.png" />
          </image>
       </ImageView>
-      <HBox layoutX="162.0" prefHeight="100.0" prefWidth="275.0">
+      <HBox fx:id="machine1" layoutX="162.0" opacity="0.0" prefHeight="100.0" prefWidth="275.0">
          <children>
             <ImageView fitHeight="99.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -64,7 +64,7 @@
             </ImageView>
          </children>
       </HBox>
-      <HBox alignment="CENTER_RIGHT" layoutX="-88.0" layoutY="151.0" prefHeight="100.0" prefWidth="275.0" rotate="90.0">
+      <HBox fx:id="machine2" alignment="CENTER_RIGHT" layoutX="-88.0" layoutY="151.0" opacity="0.0" prefHeight="100.0" prefWidth="275.0" rotate="90.0">
          <children>
             <ImageView fitHeight="99.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -88,7 +88,7 @@
             </ImageView>
          </children>
       </HBox>
-      <HBox alignment="CENTER_RIGHT" layoutX="412.0" layoutY="151.0" prefHeight="100.0" prefWidth="275.0" rotate="90.0">
+      <HBox fx:id="machine3" alignment="CENTER_RIGHT" layoutX="412.0" layoutY="151.0" opacity="0.0" prefHeight="100.0" prefWidth="275.0" rotate="90.0">
          <children>
             <ImageView fitHeight="99.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -112,6 +112,6 @@
             </ImageView>
          </children>
       </HBox>
-      <Label layoutX="286.0" layoutY="134.0" text="Suma" textFill="#ddff00" fx:id="sum" />
+      <Label fx:id="sum" layoutX="286.0" layoutY="134.0" text="Suma" textFill="#ddff00" />
    </children>
 </AnchorPane>

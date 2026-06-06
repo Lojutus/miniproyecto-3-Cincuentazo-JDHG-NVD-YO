@@ -6,6 +6,7 @@ import com.example.cincuentazo.model.Clases.Player;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public abstract class AbstractGame implements IGame {
     List<Player> Players = new ArrayList<>();
@@ -91,6 +92,25 @@ public abstract class AbstractGame implements IGame {
 
     }
     public String getLastCard(){return lastCard;}
-
+public Boolean checkWin(){
+        if(!state ) return false;
+    for (int i = 1; i < getPlayers()-1; i++) {
+        if(getPlayer(i).playing){
+            return false;
+        }
+    }
+    return true;
+}
+public Boolean changeHandCard(int playerIndex , int position){
+    return getPlayer(playerIndex).switchCard(deck.getCard(), position);
+}
+public Boolean changeHandCard(int playerIndex , String card){
+    for (int i = 0; i < 4; i++) {
+        if (Objects.equals(getPlayer(playerIndex).getHand()[i], card)) {
+            return getPlayer(playerIndex).switchCard(deck.getCard(), i);
+        }
+    }
+       return false;
+    }
 
 }
