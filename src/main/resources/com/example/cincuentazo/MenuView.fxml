@@ -23,11 +23,6 @@
             <Font name="System Bold" size="15.0" />
          </font>
       </Label>
-      <Button layoutX="261.0" layoutY="254.0" mnemonicParsing="false" text="Como jugar" />
-      <ImageView fitHeight="407.0" fitWidth="608.0">
-         <image>
-            <Image url="@../../../images/Limpio.png" />
-         </image>
-      </ImageView>
+      <Button fx:id="btnHowToPlay" layoutX="261.0" layoutY="254.0" mnemonicParsing="false" onAction="#onHowToPlayClick" text="Como jugar" />
    </children>
 </AnchorPane>
