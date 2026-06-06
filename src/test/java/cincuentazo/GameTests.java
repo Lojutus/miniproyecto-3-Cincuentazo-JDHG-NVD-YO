@@ -147,14 +147,26 @@ public class GameTests {
     }
     @org.junit.Test
     public void testingNewPlayers(){
-        Game game = Game.getInstance();
         Game.restartInstance();
+        Game game = Game.getInstance();
+        assertTrue(game.newPlayer());
         assertTrue(game.newPlayer());
         assertTrue(game.newPlayer());
         assertTrue(game.newPlayer());
         assertFalse(game.newPlayer());
     }
     @org.junit.Test
+    public void testingTheGame(){
+        Game.restartInstance();
+        Game game = Game.getInstance();
+        for (int i = 0; i < 4; i++) {
+            assertTrue(game.newPlayer());
+        }
+        Player human = game.getPlayer(0);
+        assertTrue(game.initGame());
+        assertFalse(game.initGame());
+        for (int i = 0; i < 4; i++) {
+            System.out.println(Arrays.toString(game.getPlayer(i).getHand()));
     public void testingGamePlayers(){
         Game game = Game.getInstance();
         Game.restartInstance();

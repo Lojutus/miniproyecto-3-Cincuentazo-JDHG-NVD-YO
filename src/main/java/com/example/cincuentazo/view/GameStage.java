@@ -25,7 +25,7 @@ public class GameStage extends Stage {
      */
     private GameStage() throws IOException{
         setTitle("Cincuentazo");
-        changeScene("/com/example/cincuentazo/CincuentazoView.fxml");
+        changeScene("/com/example/cincuentazo/MenuView.fxml");
     }
 
     /**
