@@ -147,8 +147,9 @@ public class GameTests {
     }
     @org.junit.Test
     public void testingNewPlayers(){
-        Game game = Game.getInstance();
         Game.restartInstance();
+        Game game = Game.getInstance();
+        assertTrue(game.newPlayer());
         assertTrue(game.newPlayer());
         assertTrue(game.newPlayer());
         assertTrue(game.newPlayer());
@@ -157,12 +158,12 @@ public class GameTests {
     //IMPORTANT , TEST OF ALL BACKEND.
     @org.junit.Test
     public void testingTheGame(){
-        Game game = Game.getInstance();
         Game.restartInstance();
-        Player human = game.getPlayer(0);
-        for (int i = 0; i < 3; i++) {
+        Game game = Game.getInstance();
+        for (int i = 0; i < 4; i++) {
             assertTrue(game.newPlayer());
         }
+        Player human = game.getPlayer(0);
         assertTrue(game.initGame());
         assertFalse(game.initGame());
         for (int i = 0; i < 4; i++) {

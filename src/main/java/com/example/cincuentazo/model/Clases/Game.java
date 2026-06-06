@@ -8,7 +8,6 @@ public  class Game extends AbstractGame {
 
 
     private Game() {
-        newPlayer();
     }
 
     /**
