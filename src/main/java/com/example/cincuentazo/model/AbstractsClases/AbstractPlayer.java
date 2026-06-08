@@ -16,7 +16,7 @@ public abstract class AbstractPlayer implements IPlayer {
         try {
              hand[position] = card;
 
-         } catch (Exception e) {
+        } catch (Exception e) {
 
              throw new RuntimeException(e);
         }
