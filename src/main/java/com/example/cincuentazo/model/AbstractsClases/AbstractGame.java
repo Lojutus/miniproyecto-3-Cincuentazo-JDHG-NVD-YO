@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Objects;
 
 public abstract class AbstractGame implements IGame {
-    List<Player> Players = new ArrayList<>();
+    List<AbstractPlayer> Players = new ArrayList<>();
     int sum; // SUMA ACTUAL
     String lastCard; // Ultima carta
     public Deck deck = new Deck();
@@ -53,11 +53,11 @@ public abstract class AbstractGame implements IGame {
         return num-'0';
     }
     public int getSum(){return sum;}
-    public Boolean newPlayer(){
+    public Boolean newPlayer(AbstractPlayer player){
         if (state ==true) return false ;
         try {
             if( Players.size()<4){
-                Players.add(new Player());
+                Players.add(player);
                 return true;
             }
         }
@@ -67,7 +67,7 @@ public abstract class AbstractGame implements IGame {
         return false;
 
     }
-    public Player getPlayer(int index){
+    public AbstractPlayer getPlayer(int index){
         return Players.get(index);
     }
     public int getPlayers(){
@@ -79,7 +79,7 @@ public abstract class AbstractGame implements IGame {
         try {
             for (int i = 0; i < Players.size(); i++) {
                 for (int j = 0; j < 4; j++) {
-                    Player player = getPlayer(i);
+                    AbstractPlayer player = getPlayer(i);
                     if(!player.switchCard(deck.getCard(), j)){
                         throw new Exception("IT CANT BE SWITCH");
                     }
@@ -95,15 +95,15 @@ public abstract class AbstractGame implements IGame {
 
     }
     public String getLastCard(){return lastCard;}
-public Boolean checkWin(){
+    public Boolean checkWin(){
         if(!state ) return false;
-    for (int i = 1; i < getPlayers()-1; i++) {
-        if(getPlayer(i).playing){
-            return false;
+        for (int i = 1; i < getPlayers()-1; i++) {
+            if(getPlayer(i).playing){
+                return false;
+            }
         }
+        return true;
     }
-    return true;
-}
     public Boolean checkLose(){
         if(!state ) return false;
 

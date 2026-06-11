@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.example.cincuentazo.model.Clases.Deck;
 import com.example.cincuentazo.model.Clases.Game;
+import com.example.cincuentazo.model.Clases.Machine;
 import com.example.cincuentazo.model.Clases.Player;
 
 import java.util.Objects;
@@ -106,8 +107,8 @@ public class GameTests {
     }
     @org.junit.Test
     public void testingCardAdd(){
-        Game game = Game.getInstance();
         Game.restartInstance();
+        Game game = Game.getInstance();
         game.add("A");
         assertEquals(10 , game.getSum());
         game.add("9");
@@ -128,8 +129,8 @@ public class GameTests {
     }
     @org.junit.Test
     public void testingAAdd(){
-        Game game = Game.getInstance();
         Game.restartInstance();
+        Game game = Game.getInstance();
         game.add("A");
         assertEquals(10 , game.getSum());
         game.add("A");
@@ -148,22 +149,22 @@ public class GameTests {
     public void testingNewPlayers(){
         Game.restartInstance();
         Game game = Game.getInstance();
-        assertTrue(game.newPlayer());
-        assertTrue(game.newPlayer());
-        assertTrue(game.newPlayer());
-        assertTrue(game.newPlayer());
-        assertFalse(game.newPlayer());
+        assertTrue(game.newPlayer(new Player()));
+        assertTrue(game.newPlayer(new Machine()));
+        assertTrue(game.newPlayer(new Machine()));
+        assertTrue(game.newPlayer(new Machine()));
+        assertFalse(game.newPlayer(new Machine()));
     }
     @org.junit.Test
     public void testingGamePlayers(){
-        Game game = Game.getInstance();
         Game.restartInstance();
+        Game game = Game.getInstance();
+        assertEquals(0 , game.getPlayers());
+        assertTrue(game.newPlayer(new Player()));
         assertEquals(1 , game.getPlayers());
-        assertTrue(game.newPlayer());
+        assertTrue(game.newPlayer(new Machine()));
         assertEquals(2 , game.getPlayers());
-        assertTrue(game.newPlayer());
-        assertEquals(3 , game.getPlayers());
-        assertTrue(game.newPlayer());
+        assertTrue(game.newPlayer(new Machine()));
 
 
     }
@@ -176,10 +177,10 @@ public class GameTests {
 
         Game.restartInstance();
          game = Game.getInstance();
-        assertTrue(game.newPlayer());
+        assertTrue(game.newPlayer(new Player()));
+        game.getPlayer(0).playing = false;
+        assertTrue(game.newPlayer(new Machine()));
         game.getPlayer(1).playing = false;
-        assertTrue(game.newPlayer());
-        game.getPlayer(2).playing = false;
         game.initGame();
         assertTrue(game.checkWin());
     }
@@ -198,6 +199,7 @@ public class GameTests {
        // --------------------------
         Game.restartInstance();
         game = Game.getInstance();
+        game.newPlayer(new Player());
         game.initGame();
         String[] expectHand = game.getPlayer(0).getHand();
 
@@ -214,6 +216,7 @@ public class GameTests {
 
         Game.restartInstance();
         game = Game.getInstance();
+        game.newPlayer(new Player());
         game.initGame();
         expectHand = game.getPlayer(0).getHand();
 

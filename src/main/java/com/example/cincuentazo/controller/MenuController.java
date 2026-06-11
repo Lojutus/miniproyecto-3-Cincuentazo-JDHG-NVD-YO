@@ -1,6 +1,8 @@
 package com.example.cincuentazo.controller;
 
 import com.example.cincuentazo.model.Clases.Game;
+import com.example.cincuentazo.model.Clases.Machine;
+import com.example.cincuentazo.model.Clases.Player;
 import com.example.cincuentazo.view.GameStage;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -12,7 +14,8 @@ public class MenuController{
         Game.restartInstance();
         Game game = Game.getInstance();
         for (int i = 0; i <= playerCount; i++) {
-            game.newPlayer();
+            if (i == 0) game.newPlayer(new Player());
+            game.newPlayer(new Machine());
         }
         GameStage.getInstance().changeScene("/com/example/cincuentazo/CincuentazoView.fxml");
     }
