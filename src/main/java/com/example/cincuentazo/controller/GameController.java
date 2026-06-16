@@ -6,6 +6,10 @@ import com.example.cincuentazo.model.AbstractsClases.AbstractPlayer;
 import com.example.cincuentazo.model.Clases.Game;
 import com.example.cincuentazo.model.Clases.Machine;
 import com.example.cincuentazo.model.Clases.Player;
+import com.example.cincuentazo.model.Exceptions.InvalidCardException;
+import com.example.cincuentazo.model.Exceptions.InvalidPlayersException;
+import com.example.cincuentazo.model.Exceptions.MachinePlayException;
+import com.example.cincuentazo.model.Exceptions.MachineThreadException;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -59,12 +63,19 @@ public class GameController {
         spriteUpdaterHelper.updateDeck(Game.getInstance().getPlayer(0), cartsSprites);
 
         showActivePlayers();
+        Platform.runLater(() -> {
+            one.getScene().setOnKeyPressed(event -> {
+                if (event.getCode() == javafx.scene.input.KeyCode.ENTER) {
+                    sendInput(null);
+                }
+            });
+        });
     }
 
     private void showActivePlayers() {
         int players = Game.getInstance().getPlayers();
         if (players == 1) {
-            throw new RuntimeException("Solo hay un jugador");
+            throw new InvalidPlayersException(players);
         }
         if (players >= 2) {
             machine1.setDisable(false);
@@ -79,7 +90,7 @@ public class GameController {
             machine3.setOpacity(1);
         }
         if (players > 4) {
-            throw new RuntimeException("Jugadores no validos");
+            throw new InvalidPlayersException(players);
         }
 
 
@@ -116,7 +127,8 @@ public class GameController {
     @FXML
     public void sendInput(MouseEvent mouseEvent) {
         if (turn == 0 && selectedCard != null) {
-            if (sentCard(actualCard)) {
+            try{
+                if (!sentCard(actualCard)) throw new InvalidCardException(actualCard);
 
                 spriteUpdaterHelper.updateCard(lastCardImage, actualCard);
                 updateSum();
@@ -126,7 +138,7 @@ public class GameController {
                 changeTurn();
 
 
-            } else {
+            } catch (InvalidCardException e){
                 if (!Game.getInstance().checkLose()) {
 
                     Alert alert = new Alert(Alert.AlertType.WARNING);
@@ -138,7 +150,6 @@ public class GameController {
                     alert.showAndWait();
                     return;
                 }
-                ;
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
 
                 alert.setTitle("GAME OVER");
@@ -178,12 +189,33 @@ public class GameController {
         new Thread(() -> {
             try {
                 Thread.sleep(2000 + (long)(Math.random() * 2000)); //  2-4s para jugar
-            } catch (InterruptedException e) { Thread.currentThread().interrupt(); }
+            } catch (InterruptedException e) {
+                throw new MachineThreadException(turn, e);
+            }
 
             Platform.runLater(() -> {
-                String card = askMachine();
+                try {
+                    String card = askMachine();
+                    if (card == null) throw new MachinePlayException(turn);
 
-                if (card == null || !Game.getInstance().add(card)) { //No pudo jugar
+                    if (!Game.getInstance().add(card)) throw new MachinePlayException(turn);
+
+                    spriteUpdaterHelper.updateCard(lastCardImage, card);
+                    updateSum();
+
+                    new Thread(() -> {
+                        try {
+                            Thread.sleep(1000 + (long) (Math.random() * 1000)); // HU-4: 1-2s para tomar carta
+                        } catch (InterruptedException e) {
+                            throw new MachineThreadException(turn, e);
+                        }
+
+                        Platform.runLater(() -> {
+                            Game.getInstance().changeHandCard(turn, card);
+                            changeTurn();
+                        });
+                    }).start();
+                }catch (MachinePlayException e){
                     Game.getInstance().playerLose(turn); //Se elimina
                     disablePlayers(turn); //Se vuelve opaco
                     if (Game.getInstance().checkWin()) {
@@ -191,22 +223,7 @@ public class GameController {
                         return;
                     }
                     changeTurn();
-                    return;
                 }
-
-                spriteUpdaterHelper.updateCard(lastCardImage, card);
-                updateSum();
-
-                new Thread(() -> {
-                    try {
-                        Thread.sleep(1000 + (long)(Math.random() * 1000)); // HU-4: 1-2s para tomar carta
-                    } catch (InterruptedException e) { Thread.currentThread().interrupt(); }
-
-                    Platform.runLater(() -> {
-                        Game.getInstance().changeHandCard(turn, card);
-                        changeTurn();
-                    });
-                }).start();
             });
         }).start();
     }
