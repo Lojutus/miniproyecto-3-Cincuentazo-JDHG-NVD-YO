@@ -1,6 +1,7 @@
 package com.example.cincuentazo.model.AbstractsClases;
 
 import com.example.cincuentazo.model.Clases.Deck;
+import com.example.cincuentazo.model.Exceptions.InvalidCardException;
 import com.example.cincuentazo.model.Interfaces.IGame;
 import com.example.cincuentazo.model.Clases.Player;
 
@@ -81,7 +82,7 @@ public abstract class AbstractGame implements IGame {
                 for (int j = 0; j < 4; j++) {
                     AbstractPlayer player = getPlayer(i);
                     if(!player.switchCard(deck.getCard(), j)){
-                        throw new Exception("IT CANT BE SWITCH");
+                        throw new InvalidCardException(deck.getCard());
                     }
                 }
 
@@ -89,20 +90,32 @@ public abstract class AbstractGame implements IGame {
             lastCard = deck.getCard();
             add(lastCard);
             return  true;
-        } catch (Exception e) {
+        } catch (InvalidCardException e) {
             throw new RuntimeException(e);
         }
 
     }
     public String getLastCard(){return lastCard;}
     public Boolean checkWin(){
-        if(!state ) return false;
-        for (int i = 1; i < getPlayers()-1; i++) {
-            if(getPlayer(i).playing){
-                return false;
+        int activePlayers = 0;
+
+        for (int i = 0; i < getPlayers(); i++) {
+            if (getPlayer(i).playing) {
+                activePlayers++;
             }
         }
-        return true;
+
+        return activePlayers == 1;
+    }
+    public int getWinnerIndex() {
+
+        for (int i = 0; i < getPlayers(); i++) {
+            if (getPlayer(i).playing) {
+                return i;
+            }
+        }
+
+        return -1;
     }
     public Boolean checkLose(){
         if(!state ) return false;

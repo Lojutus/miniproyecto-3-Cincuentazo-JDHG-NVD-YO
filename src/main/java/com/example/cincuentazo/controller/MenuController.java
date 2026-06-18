@@ -13,7 +13,7 @@ public class MenuController{
     private void startGame(int playerCount) throws IOException {
         Game.restartInstance();
         Game game = Game.getInstance();
-        for (int i = 0; i <= playerCount; i++) {
+        for (int i = 0; i < playerCount; i++) {
             if (i == 0) game.newPlayer(new Player());
             game.newPlayer(new Machine());
         }

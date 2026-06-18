@@ -54,4 +54,27 @@ public class CardViewManager {
 
         }
     }
+    public void disableDeck(HandSpritesHelper handView) {
+
+        handView.slot1.setDisable(true);
+        handView.slot2.setDisable(true);
+        handView.slot3.setDisable(true);
+        handView.slot4.setDisable(true);
+
+        handView.slot1.setOpacity(0.2);
+        handView.slot2.setOpacity(0.2);
+        handView.slot3.setOpacity(0.2);
+        handView.slot4.setOpacity(0.2);
+    }
+    public void hideDeck(HandSpritesHelper handView){
+
+        Image back = chargeImage("back");
+
+        handView.slot1.setImage(back);
+        handView.slot2.setImage(back);
+        handView.slot3.setImage(back);
+        handView.slot4.setImage(back);
+
+        disableDeck(handView);
+    }
 }

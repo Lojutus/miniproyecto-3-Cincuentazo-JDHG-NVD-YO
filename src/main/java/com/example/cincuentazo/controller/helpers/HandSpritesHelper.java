@@ -26,6 +26,7 @@ public class HandSpritesHelper {
         slot4.setImage(slotR4);
     }
 
+
     public void setSlot1(ImageView slot1) {
         this.slot1 = slot1;
     }

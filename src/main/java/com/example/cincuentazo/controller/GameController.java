@@ -53,7 +53,7 @@ public class GameController {
 
     @FXML
     public void initialize() {
-        if (Game.getInstance().getPlayers() <= 1) {
+        if (Game.getInstance().getPlayers() < 1) {
             Game.getInstance().newPlayer(new Player());
         }
         Game.getInstance().initGame();
@@ -154,10 +154,18 @@ public class GameController {
 
                 alert.setTitle("GAME OVER");
                 alert.setHeaderText("Has perdido");
-                alert.setContentText("Fin del juego");
+                alert.setContentText("Las maquinas continuaran el juego");
                 alert.showAndWait();
+                Game.getInstance().playerLose(0);
+                spriteUpdaterHelper.hideDeck(cartsSprites);
+
+                changeTurn();
+
             }
 
+        }
+        else{
+            changeTurn();
         }
 
     }
@@ -166,15 +174,18 @@ public class GameController {
         spriteUpdaterHelper.clean(selectedCard);
         selectedCard = null;
 
+
         turn++;
         if (turn >= Game.getInstance().getPlayers()) {
+            if (!Game.getInstance().getPlayer(0).playing){
+                turn = 1;
+                machineTurn();
+                return;
+            }
             turn = 0;
             return;
         }
-
         machineTurn();
-
-
     }
 
     private void machineTurn() {
@@ -219,7 +230,27 @@ public class GameController {
                     Game.getInstance().playerLose(turn); //Se elimina
                     disablePlayers(turn); //Se vuelve opaco
                     if (Game.getInstance().checkWin()) {
-                        new Alert(Alert.AlertType.INFORMATION, "Has ganado").showAndWait();
+                        int winner = Game.getInstance().getWinnerIndex();
+
+                        if (winner == 0) {
+                            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+
+                            alert.setTitle("Felicidades");
+                            alert.setHeaderText("Has ganado");
+                            alert.setContentText("Eres un larper del poker");
+                            alert.showAndWait();
+
+                        } else {
+                            if (winner != -1){
+                                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+
+                                alert.setTitle("GAME OVER");
+                                alert.setHeaderText("Una maquina ha ganado");
+                                alert.setContentText("Felicidades, a la maquina #" + winner);
+                                alert.showAndWait();
+                            }
+                        }
+
                         return;
                     }
                     changeTurn();
