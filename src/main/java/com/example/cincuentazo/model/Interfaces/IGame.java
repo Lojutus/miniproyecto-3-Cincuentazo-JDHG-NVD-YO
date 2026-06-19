@@ -1,6 +1,6 @@
 package com.example.cincuentazo.model.Interfaces;
 
-import com.example.cincuentazo.model.AbstractsClases.AbstractPlayer;
+import com.example.cincuentazo.model.AbstractsClasses.AbstractPlayer;
 /**
  * Defines the core operations of the game.
  * @author José David Hurtado

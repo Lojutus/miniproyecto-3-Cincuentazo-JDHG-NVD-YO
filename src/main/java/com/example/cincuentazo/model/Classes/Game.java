@@ -1,6 +1,6 @@
-package com.example.cincuentazo.model.Clases;
+package com.example.cincuentazo.model.Classes;
 
-import com.example.cincuentazo.model.AbstractsClases.AbstractGame;
+import com.example.cincuentazo.model.AbstractsClasses.AbstractGame;
 
 /**
  * Singleton implementation of the Cincuentazo game.

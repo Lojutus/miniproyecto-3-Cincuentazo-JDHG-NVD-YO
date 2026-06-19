@@ -1,9 +1,8 @@
-package com.example.cincuentazo.model.AbstractsClases;
+package com.example.cincuentazo.model.AbstractsClasses;
 
-import com.example.cincuentazo.model.Clases.Deck;
+import com.example.cincuentazo.model.Classes.Deck;
 import com.example.cincuentazo.model.Exceptions.InvalidCardException;
 import com.example.cincuentazo.model.Interfaces.IGame;
-import com.example.cincuentazo.model.Clases.Player;
 
 import java.util.ArrayList;
 import java.util.List;

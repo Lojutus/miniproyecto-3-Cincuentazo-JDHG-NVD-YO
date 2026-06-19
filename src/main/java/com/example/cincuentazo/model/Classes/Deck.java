@@ -1,6 +1,6 @@
-package com.example.cincuentazo.model.Clases;
+package com.example.cincuentazo.model.Classes;
 
-import com.example.cincuentazo.model.AbstractsClases.AbstractDeck;
+import com.example.cincuentazo.model.AbstractsClasses.AbstractDeck;
 
 /**
  * Represents the card deck used during the game.

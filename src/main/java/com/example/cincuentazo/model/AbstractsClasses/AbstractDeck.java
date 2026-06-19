@@ -1,4 +1,4 @@
-package com.example.cincuentazo.model.AbstractsClases;
+package com.example.cincuentazo.model.AbstractsClasses;
 
 import com.example.cincuentazo.model.Interfaces.IDeck;
 

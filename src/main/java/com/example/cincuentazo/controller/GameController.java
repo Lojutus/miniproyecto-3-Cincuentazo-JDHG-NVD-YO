@@ -2,10 +2,10 @@ package com.example.cincuentazo.controller;
 
 import com.example.cincuentazo.controller.helpers.CardViewManager;
 import com.example.cincuentazo.controller.helpers.HandSpritesHelper;
-import com.example.cincuentazo.model.AbstractsClases.AbstractPlayer;
-import com.example.cincuentazo.model.Clases.Game;
-import com.example.cincuentazo.model.Clases.Machine;
-import com.example.cincuentazo.model.Clases.Player;
+import com.example.cincuentazo.model.AbstractsClasses.AbstractPlayer;
+import com.example.cincuentazo.model.Classes.Game;
+import com.example.cincuentazo.model.Classes.Machine;
+import com.example.cincuentazo.model.Classes.Player;
 import com.example.cincuentazo.model.Exceptions.InvalidCardException;
 import com.example.cincuentazo.model.Exceptions.InvalidPlayersException;
 import com.example.cincuentazo.model.Exceptions.MachinePlayException;

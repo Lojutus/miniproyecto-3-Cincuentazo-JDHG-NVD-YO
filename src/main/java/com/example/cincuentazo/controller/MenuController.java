@@ -1,8 +1,8 @@
 package com.example.cincuentazo.controller;
 
-import com.example.cincuentazo.model.Clases.Game;
-import com.example.cincuentazo.model.Clases.Machine;
-import com.example.cincuentazo.model.Clases.Player;
+import com.example.cincuentazo.model.Classes.Game;
+import com.example.cincuentazo.model.Classes.Machine;
+import com.example.cincuentazo.model.Classes.Player;
 import com.example.cincuentazo.view.GameStage;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;

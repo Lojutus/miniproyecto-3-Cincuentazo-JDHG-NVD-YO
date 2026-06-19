@@ -1,7 +1,6 @@
 package com.example.cincuentazo.controller.helpers;
 
-import com.example.cincuentazo.model.AbstractsClases.AbstractPlayer;
-import com.example.cincuentazo.model.Clases.Player;
+import com.example.cincuentazo.model.AbstractsClasses.AbstractPlayer;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;

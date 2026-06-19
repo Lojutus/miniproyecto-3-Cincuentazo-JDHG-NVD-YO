@@ -3,10 +3,10 @@ package cincuentazo;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import com.example.cincuentazo.model.Clases.Deck;
-import com.example.cincuentazo.model.Clases.Game;
-import com.example.cincuentazo.model.Clases.Machine;
-import com.example.cincuentazo.model.Clases.Player;
+import com.example.cincuentazo.model.Classes.Deck;
+import com.example.cincuentazo.model.Classes.Game;
+import com.example.cincuentazo.model.Classes.Machine;
+import com.example.cincuentazo.model.Classes.Player;
 
 import java.util.Objects;
 
