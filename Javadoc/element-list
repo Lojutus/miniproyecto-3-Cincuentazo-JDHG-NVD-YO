@@ -1,0 +1,9 @@
+module:com.example.cincuentazo
+com.example.cincuentazo
+com.example.cincuentazo.controller
+com.example.cincuentazo.controller.helpers
+com.example.cincuentazo.model.AbstractsClases
+com.example.cincuentazo.model.Clases
+com.example.cincuentazo.model.Exceptions
+com.example.cincuentazo.model.Interfaces
+com.example.cincuentazo.view

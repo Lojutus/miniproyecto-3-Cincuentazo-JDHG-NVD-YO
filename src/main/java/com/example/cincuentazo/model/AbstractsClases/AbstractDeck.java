@@ -7,6 +7,14 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * Abstract representation of a card deck.
+ *
+ * This class provides the basic behavior for managing cards,
+ * including drawing and returning cards to the deck.
+ * @author José David Hurtado
+ * @version 1.0
+ */
 public  abstract class AbstractDeck implements IDeck {
     String[] carts = {
 
@@ -17,6 +25,14 @@ public  abstract class AbstractDeck implements IDeck {
     };
     List<String > deck = new ArrayList<>(Arrays.asList(carts));
 
+    /**
+     * Retrieves a random card from the deck.
+     *
+     * If the deck becomes empty, it is automatically regenerated
+     * and shuffled before drawing a new card.
+     *
+     * @return a randomly selected card
+     */
     public String getCard(){
         Collections.shuffle(deck);
         if(deck.isEmpty()){
@@ -26,6 +42,12 @@ public  abstract class AbstractDeck implements IDeck {
 
         return deck.removeFirst();
     }
+
+    /**
+     * Returns a card to the deck and shuffles it.
+     *
+     * @param card card to be returned
+     */
     public void addCard(String card){
         deck.add(card);
         Collections.shuffle(deck);

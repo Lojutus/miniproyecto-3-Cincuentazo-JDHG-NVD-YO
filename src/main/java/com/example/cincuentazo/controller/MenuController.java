@@ -8,8 +8,22 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import java.io.IOException;
 
+/**
+ * Controller responsible for the main menu view.
+ *
+ * This class allows the user to start a new game with a selected
+ * number of machine opponents and provides access to the game rules.
+ * @author Nerie
+ * @version 1.0
+ */
 public class MenuController{
 
+    /**
+     * Creates a new game session and initializes the requested players.
+     *
+     * @param playerCount number of machine opponents
+     * @throws IOException if the game scene cannot be loaded
+     */
     private void startGame(int playerCount) throws IOException {
         Game.restartInstance();
         Game game = Game.getInstance();
@@ -19,11 +33,28 @@ public class MenuController{
         }
         GameStage.getInstance().changeScene("/com/example/cincuentazo/CincuentazoView.fxml");
     }
+    /**
+     * Starts a game against one machine.
+     *
+     * @throws IOException if the game scene cannot be loaded
+     */
     @FXML private void jugar1() throws IOException { startGame(1); }
+    /**
+     * Starts a game against two machines.
+     *
+     * @throws IOException if the game scene cannot be loaded
+     */
     @FXML private void jugar2() throws IOException { startGame(2); }
+    /**
+     * Starts a game against three machines.
+     *
+     * @throws IOException if the game scene cannot be loaded
+     */
     @FXML private void jugar3() throws IOException { startGame(3); }
 
-
+    /**
+     * Displays the game rules and instructions.
+     */
     @FXML
     private void onHowToPlayClick() {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);

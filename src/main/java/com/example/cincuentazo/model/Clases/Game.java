@@ -2,6 +2,13 @@ package com.example.cincuentazo.model.Clases;
 
 import com.example.cincuentazo.model.AbstractsClases.AbstractGame;
 
+/**
+ * Singleton implementation of the Cincuentazo game.
+ *
+ * Provides global access to the unique game instance.
+ * @author José David Hurtado
+ * @version 1.0
+ */
 public  class Game extends AbstractGame {
 
     private static Game INSTANCE = new Game();
@@ -27,6 +34,9 @@ public  class Game extends AbstractGame {
         Game game = getInstance();
 
     }
+    /**
+     * Creates a new game instance, resetting all game data.
+     */
     public static void restartInstance(){
         INSTANCE = new Game();
     }

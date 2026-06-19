@@ -18,6 +18,16 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 
+/**
+ * Controller responsible for managing the main game view.
+ *
+ * This class coordinates the interaction between the user interface
+ * and the game logic. It handles card selection, turn management,
+ * machine actions, player elimination, and visual updates during
+ * the match.
+ * @author José David Hurtado
+ * @version 1.0
+ */
 public class GameController {
     public ImageView two;
     public ImageView one;
@@ -41,16 +51,30 @@ public class GameController {
     ImageView selectedCard;
     public ImageView lastCardImage;
 
-
+    /**
+     * Updates the displayed sum according to the current game state.
+     */
     void updateSum() {
         sum.setText(String.valueOf(Game.getInstance().getSum()));
 
     }
 
+    /**
+     * Attempts to play the selected card.
+     *
+     * @param card the card to be played
+     * @return true if the card was successfully played, false otherwise
+     */
     Boolean sentCard(String card) {
         return Game.getInstance().add(card);
     }
 
+    /**
+     * Initializes the game scene and prepares the user interface.
+     *
+     * This method creates the game state, loads the player's hand,
+     * updates the last played card, and configures keyboard shortcuts.
+     */
     @FXML
     public void initialize() {
         if (Game.getInstance().getPlayers() < 1) {
@@ -72,6 +96,11 @@ public class GameController {
         });
     }
 
+    /**
+     * Displays the machine players that participate in the current match.
+     *
+     * @throws InvalidPlayersException if the number of players is invalid
+     */
     private void showActivePlayers() {
         int players = Game.getInstance().getPlayers();
         if (players == 1) {
@@ -96,6 +125,11 @@ public class GameController {
 
     }
 
+    /**
+     * Disables the visual representation of an eliminated machine player.
+     *
+     * @param player the index of the eliminated player
+     */
     private void disablePlayers(int player) {
         if (player == 2) {
             machine1.setDisable(true);
@@ -112,6 +146,11 @@ public class GameController {
 
     }
 
+    /**
+     * Selects a card from the player's hand.
+     *
+     * @param event mouse event generated when clicking a card
+     */
     @FXML
     public void selectCard(MouseEvent event) {
         if (turn != 0) return;
@@ -124,6 +163,14 @@ public class GameController {
 
     }
 
+    /**
+     * Processes the selected card and performs the player's turn.
+     *
+     * If the card is valid, it is played and the turn changes.
+     * If no valid card remains, the player is eliminated.
+     *
+     * @param mouseEvent mouse event that triggers the action
+     */
     @FXML
     public void sendInput(MouseEvent mouseEvent) {
         if (turn == 0 && selectedCard != null) {
@@ -170,6 +217,11 @@ public class GameController {
 
     }
 
+    /**
+     * Advances the game to the next turn.
+     *
+     * If the next participant is a machine, its turn is executed automatically.
+     */
     private void changeTurn() {
         spriteUpdaterHelper.clean(selectedCard);
         selectedCard = null;
@@ -188,6 +240,12 @@ public class GameController {
         machineTurn();
     }
 
+    /**
+     * Executes the current machine player's turn.
+     *
+     * The machine waits a short period before selecting and playing
+     * a card to simulate thinking time.
+     */
     private void machineTurn() {
 
         AbstractPlayer player = Game.getInstance().getPlayer(turn);
@@ -258,6 +316,12 @@ public class GameController {
             });
         }).start();
     }
+
+    /**
+     * Requests a card decision from the current machine player.
+     *
+     * @return the card selected by the machine, or null if no move is available
+     */
     private String askMachine ()
     {
         AbstractPlayer player = Game.getInstance().getPlayer(turn);
