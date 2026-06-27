@@ -211,9 +211,7 @@ public class GameController {
             }
 
         }
-        else{
-            changeTurn();
-        }
+
 
     }
 
