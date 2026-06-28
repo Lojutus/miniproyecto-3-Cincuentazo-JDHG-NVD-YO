@@ -13,6 +13,8 @@ import java.io.IOException;
  * This class manages the primary stage of the application and provides functionality
  * to dynamically change scenes based on FXML files. It follows the Singleton pattern
  * to ensure only one instance of the stage exists throughout the application's lifecycle.
+ * @author José David Hurtado
+ * @version 1.0
  */
 public class GameStage extends Stage {
 

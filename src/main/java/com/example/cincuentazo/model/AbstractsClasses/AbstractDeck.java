@@ -1,0 +1,55 @@
+package com.example.cincuentazo.model.AbstractsClasses;
+
+import com.example.cincuentazo.model.Interfaces.IDeck;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
+/**
+ * Abstract representation of a card deck.
+ *
+ * This class provides the basic behavior for managing cards,
+ * including drawing and returning cards to the deck.
+ * @author José David Hurtado
+ * @version 1.0
+ */
+public  abstract class AbstractDeck implements IDeck {
+    String[] carts = {
+
+            "AP", "2P", "3P", "4P", "5P", "6P", "7P", "8P", "9P", "10P", "JP", "QP", "KP",
+            "AC", "2C", "3C", "4C", "5C", "6C", "7C", "8C", "9C", "10C", "JC", "QC", "KC",
+            "AD", "2D", "3D", "4D", "5D", "6D", "7D", "8D", "9D", "10D", "JD", "QD", "KD",
+            "AT", "2T", "3T", "4T", "5T", "6T", "7T", "8T", "9T", "10T", "JT", "QT", "KT"
+    };
+    List<String > deck = new ArrayList<>(Arrays.asList(carts));
+
+    /**
+     * Retrieves a random card from the deck.
+     *
+     * If the deck becomes empty, it is automatically regenerated
+     * and shuffled before drawing a new card.
+     *
+     * @return a randomly selected card
+     */
+    public String getCard(){
+        Collections.shuffle(deck);
+        if(deck.isEmpty()){
+            deck = new ArrayList<>(Arrays.asList(carts));
+            Collections.shuffle(deck);
+        }
+
+        return deck.removeFirst();
+    }
+
+    /**
+     * Returns a card to the deck and shuffles it.
+     *
+     * @param card card to be returned
+     */
+    public void addCard(String card){
+        deck.add(card);
+        Collections.shuffle(deck);
+    }
+}

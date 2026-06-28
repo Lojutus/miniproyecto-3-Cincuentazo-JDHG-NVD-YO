@@ -2,10 +2,14 @@ package com.example.cincuentazo.controller;
 
 import com.example.cincuentazo.controller.helpers.CardViewManager;
 import com.example.cincuentazo.controller.helpers.HandSpritesHelper;
-import com.example.cincuentazo.model.AbstractsClases.AbstractPlayer;
-import com.example.cincuentazo.model.Clases.Game;
-import com.example.cincuentazo.model.Clases.Machine;
-import com.example.cincuentazo.model.Clases.Player;
+import com.example.cincuentazo.model.AbstractsClasses.AbstractPlayer;
+import com.example.cincuentazo.model.Classes.Game;
+import com.example.cincuentazo.model.Classes.Machine;
+import com.example.cincuentazo.model.Classes.Player;
+import com.example.cincuentazo.model.Exceptions.InvalidCardException;
+import com.example.cincuentazo.model.Exceptions.InvalidPlayersException;
+import com.example.cincuentazo.model.Exceptions.MachinePlayException;
+import com.example.cincuentazo.model.Exceptions.MachineThreadException;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -14,6 +18,16 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 
+/**
+ * Controller responsible for managing the main game view.
+ *
+ * This class coordinates the interaction between the user interface
+ * and the game logic. It handles card selection, turn management,
+ * machine actions, player elimination, and visual updates during
+ * the match.
+ * @author José David Hurtado
+ * @version 1.0
+ */
 public class GameController {
     public ImageView two;
     public ImageView one;
@@ -37,19 +51,33 @@ public class GameController {
     ImageView selectedCard;
     public ImageView lastCardImage;
 
-
+    /**
+     * Updates the displayed sum according to the current game state.
+     */
     void updateSum() {
         sum.setText(String.valueOf(Game.getInstance().getSum()));
 
     }
 
+    /**
+     * Attempts to play the selected card.
+     *
+     * @param card the card to be played
+     * @return true if the card was successfully played, false otherwise
+     */
     Boolean sentCard(String card) {
         return Game.getInstance().add(card);
     }
 
+    /**
+     * Initializes the game scene and prepares the user interface.
+     *
+     * This method creates the game state, loads the player's hand,
+     * updates the last played card, and configures keyboard shortcuts.
+     */
     @FXML
     public void initialize() {
-        if (Game.getInstance().getPlayers() <= 1) {
+        if (Game.getInstance().getPlayers() < 1) {
             Game.getInstance().newPlayer(new Player());
         }
         Game.getInstance().initGame();
@@ -59,12 +87,24 @@ public class GameController {
         spriteUpdaterHelper.updateDeck(Game.getInstance().getPlayer(0), cartsSprites);
 
         showActivePlayers();
+        Platform.runLater(() -> {
+            one.getScene().setOnKeyPressed(event -> {
+                if (event.getCode() == javafx.scene.input.KeyCode.ENTER) {
+                    sendInput(null);
+                }
+            });
+        });
     }
 
+    /**
+     * Displays the machine players that participate in the current match.
+     *
+     * @throws InvalidPlayersException if the number of players is invalid
+     */
     private void showActivePlayers() {
         int players = Game.getInstance().getPlayers();
         if (players == 1) {
-            throw new RuntimeException("Solo hay un jugador");
+            throw new InvalidPlayersException(players);
         }
         if (players >= 2) {
             machine1.setDisable(false);
@@ -79,12 +119,17 @@ public class GameController {
             machine3.setOpacity(1);
         }
         if (players > 4) {
-            throw new RuntimeException("Jugadores no validos");
+            throw new InvalidPlayersException(players);
         }
 
 
     }
 
+    /**
+     * Disables the visual representation of an eliminated machine player.
+     *
+     * @param player the index of the eliminated player
+     */
     private void disablePlayers(int player) {
         if (player == 2) {
             machine1.setDisable(true);
@@ -101,6 +146,11 @@ public class GameController {
 
     }
 
+    /**
+     * Selects a card from the player's hand.
+     *
+     * @param event mouse event generated when clicking a card
+     */
     @FXML
     public void selectCard(MouseEvent event) {
         if (turn != 0) return;
@@ -113,10 +163,19 @@ public class GameController {
 
     }
 
+    /**
+     * Processes the selected card and performs the player's turn.
+     *
+     * If the card is valid, it is played and the turn changes.
+     * If no valid card remains, the player is eliminated.
+     *
+     * @param mouseEvent mouse event that triggers the action
+     */
     @FXML
     public void sendInput(MouseEvent mouseEvent) {
         if (turn == 0 && selectedCard != null) {
-            if (sentCard(actualCard)) {
+            try{
+                if (!sentCard(actualCard)) throw new InvalidCardException(actualCard);
 
                 spriteUpdaterHelper.updateCard(lastCardImage, actualCard);
                 updateSum();
@@ -126,7 +185,7 @@ public class GameController {
                 changeTurn();
 
 
-            } else {
+            } catch (InvalidCardException e){
                 if (!Game.getInstance().checkLose()) {
 
                     Alert alert = new Alert(Alert.AlertType.WARNING);
@@ -138,34 +197,53 @@ public class GameController {
                     alert.showAndWait();
                     return;
                 }
-                ;
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
 
                 alert.setTitle("GAME OVER");
                 alert.setHeaderText("Has perdido");
-                alert.setContentText("Fin del juego");
+                alert.setContentText("Las maquinas continuaran el juego");
                 alert.showAndWait();
+                Game.getInstance().playerLose(0);
+                spriteUpdaterHelper.hideDeck(cartsSprites);
+
+                changeTurn();
+
             }
 
         }
 
+
     }
 
+    /**
+     * Advances the game to the next turn.
+     *
+     * If the next participant is a machine, its turn is executed automatically.
+     */
     private void changeTurn() {
         spriteUpdaterHelper.clean(selectedCard);
         selectedCard = null;
 
+
         turn++;
         if (turn >= Game.getInstance().getPlayers()) {
+            if (!Game.getInstance().getPlayer(0).playing){
+                turn = 1;
+                machineTurn();
+                return;
+            }
             turn = 0;
             return;
         }
-
         machineTurn();
-
-
     }
 
+    /**
+     * Executes the current machine player's turn.
+     *
+     * The machine waits a short period before selecting and playing
+     * a card to simulate thinking time.
+     */
     private void machineTurn() {
 
         AbstractPlayer player = Game.getInstance().getPlayer(turn);
@@ -178,38 +256,70 @@ public class GameController {
         new Thread(() -> {
             try {
                 Thread.sleep(2000 + (long)(Math.random() * 2000)); //  2-4s para jugar
-            } catch (InterruptedException e) { Thread.currentThread().interrupt(); }
+            } catch (InterruptedException e) {
+                throw new MachineThreadException(turn, e);
+            }
 
             Platform.runLater(() -> {
-                String card = askMachine();
+                try {
+                    String card = askMachine();
+                    if (card == null) throw new MachinePlayException(turn);
 
-                if (card == null || !Game.getInstance().add(card)) { //No pudo jugar
+                    if (!Game.getInstance().add(card)) throw new MachinePlayException(turn);
+
+                    spriteUpdaterHelper.updateCard(lastCardImage, card);
+                    updateSum();
+
+                    new Thread(() -> {
+                        try {
+                            Thread.sleep(1000 + (long) (Math.random() * 1000)); // HU-4: 1-2s para tomar carta
+                        } catch (InterruptedException e) {
+                            throw new MachineThreadException(turn, e);
+                        }
+
+                        Platform.runLater(() -> {
+                            Game.getInstance().changeHandCard(turn, card);
+                            changeTurn();
+                        });
+                    }).start();
+                }catch (MachinePlayException e){
                     Game.getInstance().playerLose(turn); //Se elimina
                     disablePlayers(turn); //Se vuelve opaco
                     if (Game.getInstance().checkWin()) {
-                        new Alert(Alert.AlertType.INFORMATION, "Has ganado").showAndWait();
+                        int winner = Game.getInstance().getWinnerIndex();
+
+                        if (winner == 0) {
+                            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+
+                            alert.setTitle("Felicidades");
+                            alert.setHeaderText("Has ganado");
+                            alert.setContentText("Eres un larper del poker");
+                            alert.showAndWait();
+
+                        } else {
+                            if (winner != -1){
+                                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+
+                                alert.setTitle("GAME OVER");
+                                alert.setHeaderText("Una maquina ha ganado");
+                                alert.setContentText("Felicidades, a la maquina #" + winner);
+                                alert.showAndWait();
+                            }
+                        }
+
                         return;
                     }
                     changeTurn();
-                    return;
                 }
-
-                spriteUpdaterHelper.updateCard(lastCardImage, card);
-                updateSum();
-
-                new Thread(() -> {
-                    try {
-                        Thread.sleep(1000 + (long)(Math.random() * 1000)); // HU-4: 1-2s para tomar carta
-                    } catch (InterruptedException e) { Thread.currentThread().interrupt(); }
-
-                    Platform.runLater(() -> {
-                        Game.getInstance().changeHandCard(turn, card);
-                        changeTurn();
-                    });
-                }).start();
             });
         }).start();
     }
+
+    /**
+     * Requests a card decision from the current machine player.
+     *
+     * @return the card selected by the machine, or null if no move is available
+     */
     private String askMachine ()
     {
         AbstractPlayer player = Game.getInstance().getPlayer(turn);
