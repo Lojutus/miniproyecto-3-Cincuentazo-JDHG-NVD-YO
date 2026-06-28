@@ -9,3 +9,4 @@ Se emplean estructuras de datos como ArrayList para gestionar cartas y jugadores
 
 Para ejecutarlo, se debe clonar el repositorio, abrirlo en un IDE como IntelliJ o Eclipse, ejecutar la clase Main.java y contar con JavaFX configurado.
 Este proyecto fue desarrollado con fines académicos aplicando conceptos de programación orientada a objetos, manejo de eventos y concurrencia.
+Hecho por: Jose David Hurtado Gómez- 2519500 ; Nerie Vasquez Diaz ; Yoskar Alomia Alvarado 2521297
